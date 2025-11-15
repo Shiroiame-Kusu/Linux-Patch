@@ -1,0 +1,29 @@
+From a568cfdd90a421ba6eab1617e46a5d01da46e7e1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Sun, 12 Oct 2025 15:06:44 +0800
+Subject: [PATCH] Update syscalls.c
+
+---
+ kernel/sched/syscalls.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/kernel/sched/syscalls.c b/kernel/sched/syscalls.c
+index 630caedeb3ff..1bd544ffaae2 100644
+--- a/kernel/sched/syscalls.c
++++ b/kernel/sched/syscalls.c
+@@ -1597,8 +1597,12 @@ static void do_sched_yield(void)
+ 
+ 	schedstat_inc(rq->yld_count);
+ 
++#ifdef CONFIG_SCHED_ALT
++		yield_task(rq);
++#else /* !CONFIG_SCHED_ALT */
+ 	if (sysctl_sched_yield_type > 1)
+ 		current->sched_class->yield_task(rq);
++#endif /* !CONFIG_SCHED_ALT */
+ 
+ 	preempt_disable();
+ 	rq_unlock_irq(rq, &rf);
+-- 
+2.51.0
+

@@ -1,0 +1,25 @@
+From 662ddc311e46bd84659b0bcc5acfefbf0c4ea055 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Thu, 28 Aug 2025 09:32:55 +0800
+Subject: [PATCH] Update sysctl.c
+
+---
+ kernel/sysctl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/sysctl.c b/kernel/sysctl.c
+index 01aa4f9b00a8..f6d0407f6ac2 100644
+--- a/kernel/sysctl.c
++++ b/kernel/sysctl.c
+@@ -1750,7 +1750,7 @@ static const struct ctl_table kern_table[] = {
+ #endif
+ #ifdef CONFIG_SCHED_ALT
+ 	{
+-		.procname	= "yield_type",
++		.procname	= "custom_yield_type",
+ 		.data		= &sched_yield_type,
+ 		.maxlen		= sizeof (int),
+ 		.mode		= 0644,
+-- 
+2.50.1
+

@@ -1,0 +1,43 @@
+From 3837531a7b3ff4d7a746080fa1d87b1e42933240 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Sun, 12 Oct 2025 09:47:25 +0800
+Subject: [PATCH] Update Makefile
+
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index d4e8d5ad7c3d..88869ce0cbcd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -464,7 +464,7 @@ KERNELDOC       = $(srctree)/scripts/kernel-doc.py
+ export KERNELDOC
+ 
+ KBUILD_USERHOSTCFLAGS := -Wall -Wmissing-prototypes -Wstrict-prototypes \
+-			 -O2 -fomit-frame-pointer -std=gnu11
++			 -O3 -fomit-frame-pointer -std=gnu11
+ KBUILD_USERCFLAGS  := $(KBUILD_USERHOSTCFLAGS) $(USERCFLAGS)
+ KBUILD_USERLDFLAGS := $(USERLDFLAGS)
+ 
+@@ -498,7 +498,7 @@ export rust_common_flags := --edition=2021 \
+ 
+ KBUILD_HOSTCFLAGS   := $(KBUILD_USERHOSTCFLAGS) $(HOST_LFS_CFLAGS) \
+ 		       $(HOSTCFLAGS) -I $(srctree)/scripts/include
+-KBUILD_HOSTCXXFLAGS := -Wall -O2 $(HOST_LFS_CFLAGS) $(HOSTCXXFLAGS) \
++KBUILD_HOSTCXXFLAGS := -Wall -O3 $(HOST_LFS_CFLAGS) $(HOSTCXXFLAGS) \
+ 		       -I $(srctree)/scripts/include
+ KBUILD_HOSTRUSTFLAGS := $(rust_common_flags) -O -Cstrip=debuginfo \
+ 			-Zallow-features= $(HOSTRUSTFLAGS)
+@@ -867,7 +867,7 @@ endif # need-config
+ KBUILD_CFLAGS	+= -fno-delete-null-pointer-checks
+ 
+ ifdef CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
+-KBUILD_CFLAGS += -O2
++KBUILD_CFLAGS += -O3
+ # Enable software pipelining (Swing Modulo Scheduling) for innermost loops.
+ KBUILD_CFLAGS += $(call cc-option,-fmodulo-sched -fmodulo-sched-allow-regmoves) \
+ 		 $(call cc-option,-mllvm -enable-pipeliner)
+-- 
+2.51.0
+
