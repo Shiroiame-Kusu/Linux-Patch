@@ -1,17 +1,17 @@
-From 662ddc311e46bd84659b0bcc5acfefbf0c4ea055 Mon Sep 17 00:00:00 2001
+From f788178536afa2e40d577d544b3f942a0476b2d3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
-Date: Thu, 28 Aug 2025 09:32:55 +0800
-Subject: [PATCH] Update sysctl.c
+Date: Fri, 5 Dec 2025 21:05:54 +0800
+Subject: [PATCH] Patch sysctl.c Table to Prevent Register Failed
 
 ---
  kernel/sysctl.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 01aa4f9b00a8..f6d0407f6ac2 100644
+index 94ffe9e01815..04a927a5d753 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
-@@ -1750,7 +1750,7 @@ static const struct ctl_table kern_table[] = {
+@@ -1519,7 +1519,7 @@ static const struct ctl_table sysctl_subsys_table[] = {
  #endif
  #ifdef CONFIG_SCHED_ALT
  	{
@@ -21,5 +21,5 @@ index 01aa4f9b00a8..f6d0407f6ac2 100644
  		.maxlen		= sizeof (int),
  		.mode		= 0644,
 -- 
-2.50.1
+2.51.0
 

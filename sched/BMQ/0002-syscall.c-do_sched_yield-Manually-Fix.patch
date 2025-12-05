@@ -1,0 +1,57 @@
+From 35f9dc65d68976ee103be6d01414df10cfacc4a1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Fri, 5 Dec 2025 21:01:55 +0800
+Subject: [PATCH] syscall.c do_sched_yield Manually Fix
+
+---
+ kernel/sched/syscalls.c | 25 +++++++++++++++++++++++--
+ 1 file changed, 23 insertions(+), 2 deletions(-)
+
+diff --git a/kernel/sched/syscalls.c b/kernel/sched/syscalls.c
+index 9cd6a7208cc7..4455a37c5a1b 100644
+--- a/kernel/sched/syscalls.c
++++ b/kernel/sched/syscalls.c
+@@ -1590,10 +1590,30 @@ SYSCALL_DEFINE3(sched_getaffinity, pid_t, pid, unsigned int, len,
+ __read_mostly int sysctl_sched_yield_type = 2;
+ 
+ static void do_sched_yield(void)
+-{
+-	struct rq_flags rf;
++{	
++
+ 	struct rq *rq;
++	struct rq_flags rf;
++#ifdef CONFIG_SCHED_ALT
++	struct task_struct *p;
++
++	if (!sched_yield_type)
++		return;
+ 
++	rq = this_rq_lock_irq(&rf);
++
++	schedstat_inc(rq->yld_count);
++
++	p = current;
++	if (rt_task(p)) {
++		if (task_on_rq_queued(p))
++			requeue_task(p, rq);
++	} else if (rq->nr_running > 1) {
++		do_sched_yield_type_1(p, rq);
++		if (task_on_rq_queued(p))
++			requeue_task(p, rq);
++	}
++#else /* !CONFIG_SCHED_ALT */
+ 	if (!sysctl_sched_yield_type)
+ 		return;
+ 
+@@ -1604,6 +1624,7 @@ static void do_sched_yield(void)
+ 	if (sysctl_sched_yield_type > 1)
+ 		current->sched_class->yield_task(rq);
+ 
++#endif /* !CONFIG_SCHED_ALT */
+ 	preempt_disable();
+ 	rq_unlock_irq(rq, &rf);
+ 	sched_preempt_enable_no_resched();
+-- 
+2.51.0
+

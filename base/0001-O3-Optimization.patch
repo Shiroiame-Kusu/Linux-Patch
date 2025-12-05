@@ -1,14 +1,14 @@
-From 3837531a7b3ff4d7a746080fa1d87b1e42933240 Mon Sep 17 00:00:00 2001
+From e2a46166e8764e3384ff28032eb80853a0a05abb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
-Date: Sun, 12 Oct 2025 09:47:25 +0800
-Subject: [PATCH] Update Makefile
+Date: Fri, 5 Dec 2025 20:23:30 +0800
+Subject: [PATCH] O3 Optimization
 
 ---
  Makefile | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index d4e8d5ad7c3d..88869ce0cbcd 100644
+index 090e8a4269c6..4a11f27b385a 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -464,7 +464,7 @@ KERNELDOC       = $(srctree)/scripts/kernel-doc.py

@@ -1,7 +1,7 @@
-From ae971d7b8ccdc36e894f66f269c943529b31efa1 Mon Sep 17 00:00:00 2001
+From 39001e3ab967ee969bcd4535959eea568a0fb2fa Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
-Date: Wed, 27 Aug 2025 22:24:33 +0800
-Subject: [PATCH] Update Kconfig.cpu to Fix Build Error
+Date: Fri, 5 Dec 2025 20:27:47 +0800
+Subject: [PATCH] Fix Native-Build Error
 
 ---
  arch/x86/Kconfig.cpu | 2 +-
@@ -21,5 +21,5 @@ index c5023caf1f80..52d9e22a0dea 100644
  	default "5" if MWINCHIP3D || MWINCHIPC6 || MCRUSOE || MEFFICEON || MCYRIXIII || MK6 || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || M586 || MVIAC3_2 || MGEODE_LX
  
 -- 
-2.50.1
+2.51.0
 
