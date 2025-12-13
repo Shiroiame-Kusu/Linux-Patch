@@ -1,0 +1,25 @@
+From 85dfaf6374b28f71815e7ffcfc72eab204dbc9a3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Tue, 9 Dec 2025 14:16:45 +0800
+Subject: [PATCH] Change BMQ Scheduling timeslice to 1ms
+
+---
+ kernel/sched/alt_core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/sched/alt_core.c b/kernel/sched/alt_core.c
+index 763b8daf6691..497c62d8c762 100644
+--- a/kernel/sched/alt_core.c
++++ b/kernel/sched/alt_core.c
+@@ -82,7 +82,7 @@ __read_mostly int sysctl_resched_latency_warn_once = 1;
+  * Time slice
+  * (default: 4 msec, units: nanoseconds)
+  */
+-unsigned int sysctl_sched_base_slice __read_mostly	= (4 << 20);
++unsigned int sysctl_sched_base_slice __read_mostly	= (1 << 20);
+ 
+ #include "alt_core.h"
+ #include "alt_topology.h"
+-- 
+2.51.0
+
