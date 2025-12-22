@@ -1,14 +1,15 @@
-From e2a46166e8764e3384ff28032eb80853a0a05abb Mon Sep 17 00:00:00 2001
+From 6d32903f0336701f71ccadf4803174610b13326e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
-Date: Fri, 5 Dec 2025 20:23:30 +0800
-Subject: [PATCH] O3 Optimization
+Date: Mon, 22 Dec 2025 12:19:20 +0800
+Subject: [PATCH] Re-Enable O3 Optimization.
 
 ---
- Makefile | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ Makefile     | 6 +++---
+ init/Kconfig | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 090e8a4269c6..4a11f27b385a 100644
+index b1a91cefd4b1..f665290d323f 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -464,7 +464,7 @@ KERNELDOC       = $(srctree)/scripts/kernel-doc.py
@@ -38,6 +39,23 @@ index 090e8a4269c6..4a11f27b385a 100644
  # Enable software pipelining (Swing Modulo Scheduling) for innermost loops.
  KBUILD_CFLAGS += $(call cc-option,-fmodulo-sched -fmodulo-sched-allow-regmoves) \
  		 $(call cc-option,-mllvm -enable-pipeliner)
+diff --git a/init/Kconfig b/init/Kconfig
+index a263dfb0ac3d..e815d30922aa 100644
+--- a/init/Kconfig
++++ b/init/Kconfig
+@@ -1547,10 +1547,10 @@ choice
+ 	default CC_OPTIMIZE_FOR_PERFORMANCE
+ 
+ config CC_OPTIMIZE_FOR_PERFORMANCE
+-	bool "Optimize for performance (-O2)"
++	bool "Optimize for performance (-O3)"
+ 	help
+ 	  This is the default optimization level for the kernel, building
+-	  with the "-O2" compiler flag for best performance and most
++	  with the "-O3" compiler flag for best performance and most
+ 	  helpful compile-time warnings.
+ 
+ config CC_OPTIMIZE_FOR_SIZE
 -- 
 2.51.0
 
