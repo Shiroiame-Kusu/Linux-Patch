@@ -1,0 +1,42 @@
+From d76907e7b9b5812fdb4d962847299b71ede7301d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Fri, 2 Jan 2026 22:05:53 +0800
+Subject: [PATCH] syscall.c do_sched_yield Manually Fix
+
+---
+ kernel/sched/syscalls.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/kernel/sched/syscalls.c b/kernel/sched/syscalls.c
+index 630caedeb3ff..eb547e74c595 100644
+--- a/kernel/sched/syscalls.c
++++ b/kernel/sched/syscalls.c
+@@ -1587,8 +1587,9 @@ __read_mostly int sysctl_sched_yield_type = 2;
+ 
+ static void do_sched_yield(void)
+ {
+-	struct rq_flags rf;
++	
+ 	struct rq *rq;
++	struct rq_flags rf;
+ 
+ 	if (!sysctl_sched_yield_type)
+ 		return;
+@@ -1596,10 +1597,12 @@ static void do_sched_yield(void)
+ 	rq = this_rq_lock_irq(&rf);
+ 
+ 	schedstat_inc(rq->yld_count);
+-
++#ifdef CONFIG_SCHED_ALT
++	yield_task(rq);
++#else /* !CONFIG_SCHED_ALT */
+ 	if (sysctl_sched_yield_type > 1)
+ 		current->sched_class->yield_task(rq);
+-
++#endif /* !CONFIG_SCHED_ALT */
+ 	preempt_disable();
+ 	rq_unlock_irq(rq, &rf);
+ 	sched_preempt_enable_no_resched();
+-- 
+2.51.0
+

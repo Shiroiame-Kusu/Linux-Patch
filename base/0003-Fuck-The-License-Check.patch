@@ -1,0 +1,29 @@
+From e86486cb604e502c879ed72284727f83d6c551c3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=A5=A0=E3=81=A1=E3=82=83=E3=82=93?= <kusu@kusu.moe>
+Date: Mon, 22 Dec 2025 17:12:35 +0800
+Subject: [PATCH] Fuck The License Check
+
+---
+ scripts/mod/modpost.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/scripts/mod/modpost.c b/scripts/mod/modpost.c
+index 47c8aa2a6939..7076800ec72e 100644
+--- a/scripts/mod/modpost.c
++++ b/scripts/mod/modpost.c
+@@ -1764,9 +1764,9 @@ static void check_exports(struct module *mod)
+ 			add_namespace(&mod->missing_namespaces, exp->namespace);
+ 		}
+ 
+-		if (!mod->is_gpl_compatible && exp->is_gpl_only)
+-			error("GPL-incompatible module %s.ko uses GPL-only symbol '%s'\n",
+-			      basename, exp->name);
++		// if (!mod->is_gpl_compatible && exp->is_gpl_only)
++		// 	error("GPL-incompatible module %s.ko uses GPL-only symbol '%s'\n",
++		// 	      basename, exp->name);
+ 	}
+ }
+ 
+-- 
+2.51.0
+
